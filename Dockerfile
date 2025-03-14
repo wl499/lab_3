@@ -1,7 +1,7 @@
-FROM python:3.10 AS builder
+FROM python:3.12 AS builder
 COPY requirements.txt .
 RUN pip install --user -r requirements.txt
-FROM python:3.10-slim
+FROM python:3.12-slim
 WORKDIR /code
 COPY --from=builder /root/.local /root/.local
 COPY ./bot.py .
