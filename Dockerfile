@@ -1,9 +1,6 @@
-FROM python:3.12 AS builder
+FROM python:3.9-slim
+WORKDIR /app
 COPY requirements.txt .
-RUN pip install --user -r requirements.txt
-FROM python:3.12-slim
-WORKDIR /code
-COPY --from=builder /root/.local /root/.local
-COPY ./bot.py .
-ENV PATH=/root/.local:$PATH
-CMD [ "python", "-u", "./brovkov_lab_3.py" ]
+RUN pip install --no-cache-dir -r requirements.txt
+COPY brovkov_lab_3.py .
+CMD ["python", "brovkov_lab_3.py"]
